@@ -1,0 +1,10 @@
+C:\Users\Wojtek\source\repos\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csprojAssemblyReference.cache
+C:\Users\Wojtek\source\repos\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.GenerateResource.cache
+C:\Users\Wojtek\source\repos\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.CoreCompileInputs.cache
+C:\Users\Wojtek\source\repos\WindowsFormsApp1\obj\Debug\MultipleThreading.Form1.resources
+C:\Users\Wojtek\source\repos\WindowsFormsApp1\obj\Debug\MultipleThreading.Properties.Resources.resources
+C:\Users\Wojtek\source\repos\WindowsFormsApp1\bin\Debug\MultipleThreading.exe.config
+C:\Users\Wojtek\source\repos\WindowsFormsApp1\bin\Debug\MultipleThreading.exe
+C:\Users\Wojtek\source\repos\WindowsFormsApp1\bin\Debug\MultipleThreading.pdb
+C:\Users\Wojtek\source\repos\WindowsFormsApp1\obj\Debug\MultipleThreading.exe
+C:\Users\Wojtek\source\repos\WindowsFormsApp1\obj\Debug\MultipleThreading.pdb
