@@ -75,16 +75,9 @@ namespace MultipleThreading
             }
         }
 
-        private void calculateMean(IList<int> generated)
+        private void calculateMean(IEnumerable<int> dataPart)
         {
-            int step = (int)decimal.Floor(generated.Count() / this.windowLength);
-
-            for (int i = 0; i < step; i++)
-            {
-                var dataPart = generated.Skip(i * windowLength).Take(windowLength);
                 double result = dataPart.Sum() / dataPart.Count();
-            }
-
         }
 
         private void calculateMeanParallel()
@@ -94,17 +87,22 @@ namespace MultipleThreading
             timer.Start();
             if (this.inputThreads == 0)
             {
-                this.calculateMean(generated);
+            int step = (int)decimal.Floor(generated.Count() / this.windowLength);
+
+                for (int i = 0; i < step; i++)
+                {
+                    IEnumerable<int> dataPart = generated.Skip(i * windowLength).Take(windowLength);
+                    this.calculateMean(dataPart);
+                }
             }
             else
             {
                 List<Thread> threads = new List<Thread>();
                 for (int i = 0; i < this.inputThreads; i++)
-                {
-                    
+                {                 
                     var dataPart = generated.Skip(i * windowLength).Take(windowLength);
                     Thread thread = new Thread(
-                        () => calculateMean(generated)
+                        () => calculateMean(dataPart)
                         );
                     thread.Start();
                     threads.Add(thread);
@@ -120,20 +118,13 @@ namespace MultipleThreading
             this.elapsedTime = timer.Elapsed.TotalSeconds.ToString();
         }
 
-        private void calculateMedian(IList<int> generated)
+        private void calculateMedian(IEnumerable<int> dataPart)
         {
-            int step = (int)decimal.Floor(generated.Count() / this.windowLength);
-
-            for (int i = 0; i < step; i++)
-            {
-                var dataPart = generated.Skip(i * windowLength).Take(windowLength).ToArray();
                 int elements = dataPart.Count();
                 int center = elements / 2;
-
-                Array.Sort(dataPart);
-                int median = center % 2 == 0 ? dataPart[center] : (dataPart[center] + dataPart[center + 1]) / 2;
+                List<int> data = dataPart.ToList();
+                int median = center % 2 == 0 ? data[center] : (data[center] + data[center + 1]) / 2;
                 double result = dataPart.Sum() / dataPart.Count();
-            }
         }
 
         private void calculateMedianParallel()
@@ -143,16 +134,23 @@ namespace MultipleThreading
             timer.Start();
             if (this.inputThreads == 0)
             {
-                this.calculateMedian(generated);
+                int step = (int)decimal.Floor(generated.Count() / this.windowLength);
+
+                for (int i = 0; i < step; i++)
+                {
+                    IEnumerable<int> dataPart = generated.Skip(i * windowLength).Take(windowLength).ToArray();
+
+                    this.calculateMedian(dataPart);
+                }
             }
             else
             {
-                List<Thread> threads = new List<Thread>();
+                IList<Thread> threads = new List<Thread>();
                 for (int i = 0; i < this.inputThreads; i++)
                 {
-                    var dataPart = generated.Skip(i * windowLength).Take(windowLength);
+                    IEnumerable<int> dataPart = generated.Skip(i * windowLength).Take(windowLength);
                     Thread thread = new Thread(
-                        () => calculateMedian(generated)
+                        () => calculateMedian(dataPart)
                         );
                     thread.Start();
                     threads.Add(thread);

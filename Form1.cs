@@ -68,12 +68,13 @@ namespace MultipleThreading
 
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
-            if (Int32.Parse(textBox3.Text) > Environment.ProcessorCount)
+            try
             {
-                MessageBox.Show("Za mało dostepnych zasobów");
+                this.userAction.setInputThreads(Int32.Parse(textBox3.Text));
+            } catch (Exception ex)
+            {
             }
 
-            this.userAction.setInputThreads(Int32.Parse(textBox3.Text));
         }
 
         private void textBox4_TextChanged(object sender, EventArgs e)
@@ -81,6 +82,7 @@ namespace MultipleThreading
             if(Int32.Parse(textBox4.Text) >= this.len)
             {
                 MessageBox.Show("Okno musi być mniejsze niż długość wektora");
+                return;
             }
             this.userAction.setWindowLength(Int32.Parse(textBox4.Text));
         }
